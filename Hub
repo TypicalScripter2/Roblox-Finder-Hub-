@@ -1,0 +1,124 @@
+local OrionLib = loadstring(game:HttpGet('https://raw.githubusercontent.com/sxlent404/ModdedOrion/refs/heads/main/orion.lua'))()
+
+local Window = OrionLib:MakeWindow({
+    Name = "Game Hub",
+    HidePremium = false, 
+    SaveConfig = true,
+    ConfigFolder = "OrionTest",
+    IntroEnabled = true,
+    IntroText = "Game Hub",
+    IntroIcon = "rbxassetid://93822531450646",
+    Icon = "rbxassetid://93822531450646"
+})
+
+local FTP = Window:MakeTab({
+    Name = "Find The Plushies",
+    Icon = "rbxassetid://9178976271",
+    PremiumOnly = false
+})
+
+local FTT = Window:MakeTab({
+    Name = "Find The Tophats",
+    Icon = "rbxassetid://9178976271",
+    PremiumOnly = false
+})
+
+local FTC = Window:MakeTab({
+    Name = "Find The Chomiks",
+    Icon = "rbxassetid://9178976271",
+    PremiumOnly = false
+})
+
+local FTK = Window:MakeTab({
+    Name = "Find The Kittens",
+    Icon = "rbxassetid://9178976271",
+    PremiumOnly = false
+})
+
+local FTPA = Window:MakeTab({
+    Name = "Find The Pandas",
+    Icon = "rbxassetid://9178976271",
+    PremiumOnly = false
+})
+
+OrionLib:MakeNotification({
+    Name = "Credits",
+    Content = "Made by: sxlent404 and TypicalScripter",
+    Image = "rbxassetid://93822531450646",
+    Time = 2
+})
+
+FTP:AddButton({
+    Name = "Troll Plushie",
+    Callback = function()
+        local player = game.Players.LocalPlayer
+        local character = player.Character or player.CharacterAdded:Wait()
+        local rootPart = character:WaitForChild("HumanoidRootPart")
+        rootPart.CFrame = CFrame.new(887.588134765625, 1181.25732421875, -63.9229736328125)
+        wait(1)
+        rootPart.CFrame = CFrame.new(1471.7535400390625, 599.4359741210938, -45.63398361206055)
+    end
+})
+
+FTC:AddButton({
+    Name = "Unlock Trollhattan",
+    Callback = function()
+        local player = game.Players.LocalPlayer
+        local character = player.Character or player.CharacterAdded:Wait()
+        local rootPart = character:WaitForChild("HumanoidRootPart")
+        rootPart.CFrame = CFrame.new(1353.7197265625, 150.91104125976562, -2851.667724609375)
+    end
+})
+
+FTT:AddButton({
+    Name = "Biblically Accurate Tophat",
+    Callback = function()
+        local player = game.Players.LocalPlayer
+        local character = player.Character or player.CharacterAdded:Wait()
+        local rootPart = character:WaitForChild("HumanoidRootPart")
+        rootPart.CFrame = CFrame.new(0.7993485927581787, 14133.6884765625, -238.9175567626953)
+    end
+})
+
+FTT:AddButton({
+    Name = "Datavoid Tophat",
+    Callback = function()
+        local player = game.Players.LocalPlayer
+        local character = player.Character or player.CharacterAdded:Wait()
+        local rootPart = character:WaitForChild("HumanoidRootPart")
+        rootPart.CFrame = CFrame.new(-623.5052490234375, 10439.048828125, 1762.14111328125)
+    end
+})
+
+FTK:AddButton({
+    Name = "Troll Kitten",
+    Callback = function()
+        local player = game.Players.LocalPlayer
+        local character = player.Character or player.CharacterAdded:Wait()
+        local rootPart = character:WaitForChild("HumanoidRootPart")
+        rootPart.CFrame = CFrame.new(-445.40667724609375, 39.000972747802734, -195.57371520996094)
+    end
+})
+
+FTPA:AddButton({
+    Name = "Atomic Panda",
+    Callback = function()
+        local player = game.Players.LocalPlayer
+        local character = player.Character or player.CharacterAdded:Wait()
+        local rootPart = character:WaitForChild("HumanoidRootPart")
+        rootPart.CFrame = CFrame.new(-1723.15478515625, 8073.9580078125, 447.65252685546875)
+    end
+})
+
+FTP:AddButton({
+    Name = "Blue Screened Plushie",
+    Callback = function()
+        local player = game.Players.LocalPlayer
+        local character = player.Character or player.CharacterAdded:Wait()
+        local rootPart = character:WaitForChild("HumanoidRootPart")
+        rootPart.CFrame = CFrame.new(729.5423583984375, -88.68867492675781, -785.0630493164062)
+    end
+})
+
+
+OrionLib:Init()
