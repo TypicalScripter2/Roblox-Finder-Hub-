@@ -63,6 +63,32 @@ FTP:AddButton({
     end
 })
 
+FTP:AddButton({
+    Name = "Find A lot of plushies",
+    Callback = function()
+local workspace = game:GetService("Workspace")
+local player = game.Players.LocalPlayer
+local character = player.Character or player.CharacterAdded:Wait()
+local playerPosition = character:WaitForChild("HumanoidRootPart").Position
+local plushiesFolder = workspace:WaitForChild("Plushies")
+
+for _, child in ipairs(plushiesFolder:GetChildren()) do
+    if string.find(child.Name:lower(), "plushie") then
+        print(child.Name)
+        if child:IsA("BasePart") then
+            child.CFrame = CFrame.new(playerPosition)
+        elseif child:IsA("Model") then
+            for _, part in ipairs(child:GetChildren()) do
+                if part:IsA("BasePart") then
+                    part.CFrame = CFrame.new(playerPosition)
+                end
+            end
+        end
+    end
+end
+    end
+})
+
 FTC:AddButton({
     Name = "Unlock Trollhattan",
     Callback = function()
