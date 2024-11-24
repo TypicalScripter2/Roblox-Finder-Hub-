@@ -64,7 +64,7 @@ FTP:AddButton({
 })
 
 FTP:AddButton({
-    Name = "Find A lot of plushies",
+    Name = "Broke Index",
     Callback = function()
 local workspace = game:GetService("Workspace")
 local player = game.Players.LocalPlayer
