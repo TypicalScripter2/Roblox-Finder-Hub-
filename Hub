@@ -1,153 +1,170 @@
-if not game:IsLoaded() then
-    game.Loaded:Wait()
+local Fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))()
+local httpService = game:GetService("HttpService")
+
+local ThemeManager = {} do
+    ThemeManager.Folder = "FindHub"
+    ThemeManager.Settings = {
+        Theme = "Amethyst"
+    }
+    function ThemeManager:SetFolder(folder)
+        self.Folder = folder
+        if not isfolder(self.Folder) then
+            makefolder(self.Folder)
+        end
+    end
+    function ThemeManager:SetLibrary(library)
+        self.Library = library
+    end
+    function ThemeManager:SaveSettings()
+        writefile(self.Folder .. "/theme.json", httpService:JSONEncode(self.Settings))
+    end
+    function ThemeManager:LoadSettings()
+        local path = self.Folder .. "/theme.json"
+        if isfile(path) then
+            local data = readfile(path)
+            local success, decoded = pcall(httpService.JSONDecode, httpService, data)
+            if success then
+                self.Settings.Theme = decoded.Theme
+            end
+        end
+    end
 end
-local OrionLib = loadstring(game:HttpGet('https://raw.githubusercontent.com/sxlent404/ModdedOrion/refs/heads/main/orion.lua'))()
 
-local Window = OrionLib:MakeWindow({
-    Name = "Game Hub",
-    HidePremium = false, 
-    SaveConfig = true,
-    ConfigFolder = "OrionTest",
-    IntroEnabled = true,
-    IntroText = "Game Hub",
-    IntroIcon = "rbxassetid://93822531450646",
-    Icon = "rbxassetid://93822531450646"
-})
+Config = {}
+local AllFuncs = {}
+local Players = game:GetService("Players")
+local LocalPlayer = Players.LocalPlayer
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local RunService = game:GetService("RunService")
+local VirtualInputManager = game:GetService("VirtualInputManager")
+local PlayerGui = LocalPlayer.PlayerGui
+local Backpack = LocalPlayer.Backpack
 
-local FTP = Window:MakeTab({
-    Name = "Find The Plushies",
-    Icon = "rbxassetid://9178976271",
-    PremiumOnly = false
-})
-
-local FTT = Window:MakeTab({
-    Name = "Find The Tophats",
-    Icon = "rbxassetid://9178976271",
-    PremiumOnly = false
-})
-
-local FTC = Window:MakeTab({
-    Name = "Find The Chomiks",
-    Icon = "rbxassetid://9178976271",
-    PremiumOnly = false
-})
-
-local FTK = Window:MakeTab({
-    Name = "Find The Kittens",
-    Icon = "rbxassetid://9178976271",
-    PremiumOnly = false
-})
-
-local FTPA = Window:MakeTab({
-    Name = "Find The Pandas",
-    Icon = "rbxassetid://9178976271",
-    PremiumOnly = false
-})
-
-OrionLib:MakeNotification({
-    Name = "Credits",
-    Content = "Made by: sxlent404 and TypicalScripter",
-    Image = "rbxassetid://93822531450646",
-    Time = 2
-})
-
-FTP:AddButton({
-    Name = "Troll Plushie",
-    Callback = function()
+AllFuncs['Troll Plushie'] = function()
         local player = game.Players.LocalPlayer
         local character = player.Character or player.CharacterAdded:Wait()
         local rootPart = character:WaitForChild("HumanoidRootPart")
         rootPart.CFrame = CFrame.new(887.588134765625, 1181.25732421875, -63.9229736328125)
         wait(1)
         rootPart.CFrame = CFrame.new(1471.7535400390625, 599.4359741210938, -45.63398361206055)
-    end
-})
-
-FTP:AddButton({
-    Name = "Broke Index",
-    Callback = function()
-local workspace = game:GetService("Workspace")
-local player = game.Players.LocalPlayer
-local character = player.Character or player.CharacterAdded:Wait()
-local playerPosition = character:WaitForChild("HumanoidRootPart").Position
-local plushiesFolder = workspace:WaitForChild("Plushies")
-
-for _, child in ipairs(plushiesFolder:GetChildren()) do
-    if string.find(child.Name:lower(), "plushie") then
-        print(child.Name)
-        if child:IsA("BasePart") then
-            child.CFrame = CFrame.new(playerPosition)
-        elseif child:IsA("Model") then
-            for _, part in ipairs(child:GetChildren()) do
-                if part:IsA("BasePart") then
-                    part.CFrame = CFrame.new(playerPosition)
-                end
-            end
-        end
-    end
 end
-    end
-})
 
-FTC:AddButton({
-    Name = "Unlock Trollhattan",
-    Callback = function()
-        local player = game.Players.LocalPlayer
-        local character = player.Character or player.CharacterAdded:Wait()
-        local rootPart = character:WaitForChild("HumanoidRootPart")
-        rootPart.CFrame = CFrame.new(1353.7197265625, 150.91104125976562, -2851.667724609375)
-    end
-})
-
-FTT:AddButton({
-    Name = "Biblically Accurate Tophat",
-    Callback = function()
-        local player = game.Players.LocalPlayer
-        local character = player.Character or player.CharacterAdded:Wait()
-        local rootPart = character:WaitForChild("HumanoidRootPart")
-        rootPart.CFrame = CFrame.new(0.7993485927581787, 14133.6884765625, -238.9175567626953)
-    end
-})
-
-FTT:AddButton({
-    Name = "Datavoid Tophat",
-    Callback = function()
-        local player = game.Players.LocalPlayer
-        local character = player.Character or player.CharacterAdded:Wait()
-        local rootPart = character:WaitForChild("HumanoidRootPart")
-        rootPart.CFrame = CFrame.new(-623.5052490234375, 10439.048828125, 1762.14111328125)
-    end
-})
-
-FTK:AddButton({
-    Name = "Troll Kitten",
-    Callback = function()
-        local player = game.Players.LocalPlayer
-        local character = player.Character or player.CharacterAdded:Wait()
-        local rootPart = character:WaitForChild("HumanoidRootPart")
-        rootPart.CFrame = CFrame.new(-445.40667724609375, 39.000972747802734, -195.57371520996094)
-    end
-})
-
-FTPA:AddButton({
-    Name = "Atomic Panda",
-    Callback = function()
-        local player = game.Players.LocalPlayer
-        local character = player.Character or player.CharacterAdded:Wait()
-        local rootPart = character:WaitForChild("HumanoidRootPart")
-        rootPart.CFrame = CFrame.new(-1723.15478515625, 8073.9580078125, 447.65252685546875)
-    end
-})
-
-FTP:AddButton({
-    Name = "Blue Screened Plushie",
-    Callback = function()
+AllFuncs['Blue Screened Plushie'] = function()
         local player = game.Players.LocalPlayer
         local character = player.Character or player.CharacterAdded:Wait()
         local rootPart = character:WaitForChild("HumanoidRootPart")
         rootPart.CFrame = CFrame.new(729.5423583984375, -88.68867492675781, -785.0630493164062)
+end
+
+AllFuncs['Datavoid Tophat'] = function()
+        local player = game.Players.LocalPlayer
+        local character = player.Character or player.CharacterAdded:Wait()
+        local rootPart = character:WaitForChild("HumanoidRootPart")
+        rootPart.CFrame = CFrame.new(-623.5052490234375, 10439.048828125, 1762.14111328125)
+end
+
+AllFuncs['BA Tophat'] = function()
+        local player = game.Players.LocalPlayer
+        local character = player.Character or player.CharacterAdded:Wait()
+        local rootPart = character:WaitForChild("HumanoidRootPart")
+        rootPart.CFrame = CFrame.new(0.7993485927581787, 14133.6884765625, -238.9175567626953)
+end
+
+AllFuncs['Atomic Panda'] = function()
+        local player = game.Players.LocalPlayer
+        local character = player.Character or player.CharacterAdded:Wait()
+        local rootPart = character:WaitForChild("HumanoidRootPart")
+        rootPart.CFrame = CFrame.new(-1723.15478515625, 8073.9580078125, 447.65252685546875)
+end
+
+local Window = Fluent:CreateWindow({
+    Title = "Find Hub",
+    SubTitle = "Private Script",
+    TabWidth = 160,
+    Size = UDim2.fromOffset(580, 460),
+    Acrylic = false,
+    Theme = ThemeManager.Settings.Theme,
+    MinimizeKey = Enum.KeyCode.LeftControl
+})
+
+ThemeManager:SetLibrary(Fluent)
+ThemeManager:SetFolder("FindHub")
+ThemeManager:LoadSettings()
+
+local Tabs = {
+    Main = Window:AddTab({ Title = "Find The Plushies", Icon = "" })
+}
+local Tabs2 = {
+	MainT = Window:AddTab({ Title = "Find The Tophats", Icon = "" })
+}
+local Tabs3 = {
+	MainP = Window:AddTab({ Title = "Find The Pandas", Icon = "" })
+}
+local Farming = Tabs.Main:AddSection("Find The Plushies")
+
+local FarmingT = Tabs2.MainT:AddSection("Find The Tophats")
+
+local FarmingP = Tabs3.MainP:AddSection("Find The Pandas")
+
+Farming:AddToggle("AutoFarm", {
+    Title = "Get Troll Plushie",
+    Default = false,
+    Callback = function(Value)
+        Config['Troll Plushie'] = Value
+        if Value then
+            task.spawn(AllFuncs['Troll Plushie'])
+        end
     end
 })
 
+Farming:AddToggle("AutoFarm", {
+    Title = "Get Blue Screened Plushie",
+    Default = false,
+    Callback = function(Value)
+        Config['Blue Screened Plushie'] = Value
+        if Value then
+            task.spawn(AllFuncs['Blue Screened Plushie'])
+        end
+    end
+})
 
-OrionLib:Init()
+FarmingT:AddToggle("AutoFarm", {
+    Title = "Get Datavoid Tophat",
+    Default = false,
+    Callback = function(Value)
+        Config['Datavoid Tophat'] = Value
+        if Value then
+            task.spawn(AllFuncs['Datavoid Tophat'])
+        end
+    end
+})
+
+FarmingT:AddToggle("AutoFarm", {
+    Title = "Get Biblically Accurate Tophat",
+    Default = false,
+    Callback = function(Value)
+        Config['BA Tophat'] = Value
+        if Value then
+            task.spawn(AllFuncs['BA Tophat'])
+        end
+    end
+})
+
+FarmingP:AddToggle("AutoFarm", {
+    Title = "Get Atomic Panda",
+    Default = false,
+    Callback = function(Value)
+        Config['Atomic Panda'] = Value
+        if Value then
+            task.spawn(AllFuncs['Atomic Panda'])
+        end
+    end
+})
+
+Window:SelectTab(1)
+
+Fluent:Notify({
+    Title = "Find Hub",
+    Content = "The script has been loaded.",
+    Duration = 8
+})
