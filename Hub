@@ -4,7 +4,7 @@ local httpService = game:GetService("HttpService")
 local ThemeManager = {} do
     ThemeManager.Folder = "FindHub"
     ThemeManager.Settings = {
-        Theme = "Amethyst"
+        Theme = "Dark"
     }
     function ThemeManager:SetFolder(folder)
         self.Folder = folder
@@ -54,6 +54,13 @@ AllFuncs['Blue Screened Plushie'] = function()
         local character = player.Character or player.CharacterAdded:Wait()
         local rootPart = character:WaitForChild("HumanoidRootPart")
         rootPart.CFrame = CFrame.new(729.5423583984375, -88.68867492675781, -785.0630493164062)
+end
+
+AllFuncs['TDA'] = function()
+        local player = game.Players.LocalPlayer
+        local character = player.Character or player.CharacterAdded:Wait()
+        local rootPart = character:WaitForChild("HumanoidRootPart")
+        rootPart.CFrame = CFrame.new(2399, 20573, 963)
 end
 
 AllFuncs['Datavoid Tophat'] = function()
@@ -127,7 +134,16 @@ Farming:AddToggle("AutoFarm", {
         end
     end
 })
-
+FarmingT:AddToggle("AutoFarm", {
+    Title = "Get Tophat of Difficulty Ascension",
+    Default = false,
+    Callback = function(Value)
+        Config['TDA'] = Value
+        if Value then
+            task.spawn(AllFuncs['TDA'])
+        end
+    end
+})
 FarmingT:AddToggle("AutoFarm", {
     Title = "Get Datavoid Tophat",
     Default = false,
